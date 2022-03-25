@@ -1,0 +1,1 @@
+docker run -p "80:80" -v ${PWD}/app:/app mattrayner/lamp:latest-1804
