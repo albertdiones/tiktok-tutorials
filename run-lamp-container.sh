@@ -1,1 +1,1 @@
-docker run -p "80:80" -v ${PWD}/app:/app mattrayner/lamp:latest-1804
+docker run -p "80:80" -p 3306:3306 -v ${PWD}/app:/app -v ${PWD}/mysql:/var/lib/mysql mattrayner/lamp:latest-1804
