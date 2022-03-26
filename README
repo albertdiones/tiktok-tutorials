@@ -1,0 +1,5 @@
+
+
+1. Install docker on your system
+2. Run ./run-lap-container.sh
+3. access localhost:80
