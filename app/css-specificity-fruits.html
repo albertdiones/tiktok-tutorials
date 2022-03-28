@@ -1,0 +1,60 @@
+<html>
+<style>
+    body {
+        font-size:20px;
+    }
+    div {
+        padding:1em;
+        width:300px;
+        height:300px;
+        float:left;
+    }
+    .ripe {
+        background:red;
+    }
+    .unripe {
+        background:green;
+    }
+    #eggplant.ripe {
+        background:violet;
+    }
+    #spinach {
+        background:green;
+    }
+    #aratiles.unripe {
+        background:yellowgreen;
+    }
+    /* Nabulok! */
+    div.plant.veggie.unripe {
+        background:darkgoldenrod;
+    }
+</style>
+<body>
+    <div id="apple" class="plant fruit ripe">
+        Apple
+    </div>
+    <div id="aratiles" class="plant fruit unripe">
+        Aratiles
+    </div>
+    <div id="spinach" class="plant veggie unripe">
+        Spinach
+    </div>
+    <div id="eggplant" class="plant veggie unripe">
+        Eggplant
+    </div>
+    <div style="clear:both"></div>
+    <script>
+        document.querySelectorAll(".plant").forEach(
+            (el) => {
+                el.addEventListener(
+                    'click',
+                    (e) => {
+                        e.target.classList.remove('unripe');
+                        e.target.classList.add('ripe');
+                    }
+                )
+            }
+        );
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<html>
+<style>
+    body {
+        font-size:20px;
+        background:#f8f8f8;
+        font-family: Verdana sans-serif;
+    }
+    span {
+        color:red;
+    }
+    div.users {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: nowrap;
+    }
+    div.user {
+        padding:1em;
+        width:300px;
+        height:300px;
+        border:1px solid #888;
+    }
+    .verified {
+        background:white;
+    }
+    .unverified {
+        background:lightgrey;
+    }
+    div#users .user.female.unverified { /* 131 */
+        background:lightpink;
+    }
+    body div#users div.user.female { /* 123 */
+        background:lightblue;
+    }
+    #page-footer {
+        color:gray;
+        font-size:0.6em;
+        padding:3em 0;
+        text-align:center;
+    }
+    h1 {
+        text-align:center;
+    }
+    .name {
+        font-family:"Times New Roman";
+        font-size:40px;
+        font-weight:bold;
+    }
+    .users .phone {
+        display:block;
+        font-size:20px;
+        color:blue;
+    }
+    .users .address {
+        display:block;
+        font-size:18px;
+    }
+    .phone:before {
+        content:"#"
+    }
+    .address:before {
+        content:"Loc: "
+    }
+</style>
+<body>
+    <h1>Search Result for: 4007</h1>
+    <div id="users" class="users">
+        <div id="user-4001" class="user male unverified">
+            <span class="name">Pedro Apple</span>
+            <span class="address">4007 Makati</span>
+            <span class="phone">12312312456</span>
+        </div>
+        <div id="user-4005" class="user male unverified">
+            <span class="name">Juan Aratiles</span>
+            <span class="address">4007 Mandaluyong City</span>
+            <span class="phone fa-solid fa-phone">31231232132</span>
+        </div>
+        <div id="user-4007" class="user female unverified">
+            <span class="name">Kira Spinach</span>
+            <span class="address">Pasig</span>
+            <span class="phone">0912321312</span>
+        </div>
+        <div id="user-4008" class="user female unverified">
+            <span class="name">Lola Eggplant</span>
+            <span class="address">Quezon City</span>
+            <span class="phone">Phone: 400-7132</span>
+        </div>
+    </div>
+
+    <div id="page-footer">
+        <span class="phone">123123-12312</span>
+        <span class="address">123 EDSA Mandaluyong City</span>
+    </div>
+    <script>
+        document.querySelectorAll(".user").forEach(
+            (el) => {
+                el.addEventListener(
+                    'click',
+                    (e) => {
+                        e.target.classList.remove('unverified');
+                        e.target.classList.add('verified');
+                    }
+                )
+            }
+        );
+    </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+</body>
+</html>
