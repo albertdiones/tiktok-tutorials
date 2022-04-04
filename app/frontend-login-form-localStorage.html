@@ -1,0 +1,45 @@
+<html>
+<style>body { text-align:center; padding: 200px 0; font-size:20px; } input { font-size:1em; width: 500px; height:50px; margin: 10px; }  button { width: 300px; height: 30px; }  </style>
+<style>
+    .red {
+        color:red;
+    }
+</style>
+<body>
+<form action="backend-login.php" method="post" id="login" >
+    <script>
+        let username = localStorage.getItem('username');
+        let password = localStorage.getItem('password');
+
+        if (username && password) {
+            document.write("Welcome back " + username + "<br />");
+            document.write("Your password is: " + password + "<br />");
+        }
+    </script>
+    <input name="username" type="text" value="pedro.testerson"/>
+    <input name="password" type="password" />
+    <button type="submit" name="action" value="submit">Submit</button>
+    <button type="submit" name="action" value="cancel">Cancel</button>
+</form>
+<script>
+    let form = document.querySelector("form");
+
+    form.addEventListener(
+        "submit",
+        function(e) {
+            let formData = new FormData;
+
+            localStorage.setItem("username", form.querySelector("input[name=username]").value)
+            localStorage.setItem("password", form.querySelector("input[name=password]").value)
+
+
+           e.preventDefault();
+
+            location.reload();
+
+            return false;
+        }
+    );
+</script>
+</body>
+</html>
