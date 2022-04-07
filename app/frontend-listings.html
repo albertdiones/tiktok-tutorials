@@ -46,11 +46,11 @@
         document
             .querySelector("#listings");
     let loadingListingCount = 0;
-    function loadListing() {
+    function loadListing(url) {
         listings.classList.add('loading');
         loadingListingCount++;
         fetch(
-            "listing.php",
+            url,
             {
                 method: 'GET',
             }
@@ -71,10 +71,11 @@
                 }
             );
     }
-    loadListing();
-    loadListing();
-    loadListing();
-    loadListing();
+    loadListing("listing.php");
+    loadListing("listing.php");
+    loadListing("listing-mics.php");
+    loadListing("listing.php");
+    loadListing("listing.php");
 </script>
 </body>
 </html>
