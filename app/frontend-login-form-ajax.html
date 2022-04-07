@@ -1,7 +1,19 @@
 <html>
 <style>body { text-align:center; padding: 200px 0; font-size:20px; } input { font-size:1em; width: 500px; height:50px; margin: 10px; }  button { width: 300px; height: 30px; }  </style>
+<style>
+    .error {
+        color:red;
+        font-weight: bold;
+        font-family: Verdana, sans-serif;
+    }
+    form.loading:before {
+        content:"Loading...";
+        color:#888;
+    }
+</style>
 <body>
 <form action="backend-login.php" method="post">
+    <div class="error" ></div>
     <input name="username" type="text" value="pedro.testerson"/>
     <input name="password" type="password" />
     <button type="submit" name="action" value="submit">Submit</button>
@@ -18,6 +30,11 @@
             formData.append("username", form.querySelector("input[name=username]").value);
             formData.append("password", form.querySelector("input[name=password]").value);
 
+            let status;
+
+            form.classList.add('loading');
+            document.querySelector('form .error').innerHTML = "";
+
             fetch(
                 "backend-login.php",
                 {
@@ -27,14 +44,21 @@
             )
             .then(
                 function(response) {
+                    status = response.status;
                     return response.text();
                 }
             )
             .then(
                 function (response) {
-                    alert(response);
+                    form.classList.remove('loading');
+                    if (status === 400) {
+                        document.querySelector('form .error').innerHTML = response;
+                    }
+                    else {
+                        alert(response);
+                    }
                 }
-            );
+            )
 
             e.preventDefault();
             return false;

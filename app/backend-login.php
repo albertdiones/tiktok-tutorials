@@ -1,4 +1,5 @@
 <?php
+usleep(500000);
 set_exception_handler(
     function(Throwable $e) {
         echo $e->getMessage();
@@ -26,5 +27,6 @@ if (sha1($_POST['password']) === $user['sha1_password']) {
     echo "Password is correct user:".$_POST['username'];
 }
 else {
+    http_response_code(400);
     throw new \Exception("Invalid password!!!");
 }
