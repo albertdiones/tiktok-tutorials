@@ -1,0 +1,77 @@
+<html>
+<style>body { text-align:center; padding: 200px 0; font-size:20px; } input { font-size:1em; width: 500px; height:50px; margin: 10px; }  button { width: 300px; height: 30px; }  </style>
+
+<style>
+    #listings {
+        width:700px;
+        margin: 0 auto;
+    }
+    #listings.loading {
+        background: url(200.gif) no-repeat center bottom;
+        padding-bottom:130px;
+    }
+    .listing {
+        padding:10px;
+        margin:10px;
+    }
+    .listing img {
+        float:left;
+        border:1px solid #ddd;
+        padding:2px;
+        margin:2px;
+    }
+    .listing h3 {
+        font-family: Verdana, sans-serif;
+        color:darkblue;
+        margin-bottom:0.5em;
+        margin-top:0.5em;
+    }
+    .listing p {
+        color:#222;
+        font-size:1.05em;
+    }
+    .listing small {
+        clear:both;
+        color:#777;
+    }
+</style>
+<body>
+<h1>Listings Near You</h1>
+<div id="listings"></div>
+<script>
+    let listings =
+        document
+            .querySelector("#listings");
+    let loadingListingCount = 0;
+    function loadListing() {
+        listings.classList.add('loading');
+        loadingListingCount++;
+        fetch(
+            "listing.php",
+            {
+                method: 'GET',
+            }
+        )
+            .then(
+                function(response) {
+                    return response.text();
+                }
+            )
+            .then(
+                function (response) {
+                    listings.innerHTML += response;
+                    loadingListingCount--;
+
+                    if (loadingListingCount<=0) {
+                        listings.classList.remove('loading');
+                    }
+                }
+            );
+    }
+    loadListing();
+    loadListing();
+    loadListing();
+    loadListing();
+</script>
+</body>
+</html>
