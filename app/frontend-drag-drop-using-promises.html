@@ -31,6 +31,7 @@
     </div>
     <script>
         let currentAction;
+        let currentlyDragging = false;
         document.querySelectorAll('.file').forEach(
             function(el) {
                 el.addEventListener(
@@ -39,35 +40,60 @@
                         let fileName = el.querySelector('h3').innerText;
                         event.preventDefault();
                         currentAction = new Promise(
-                            function(resolve) {
+                            function(resolve, reject) {
                                 window.addEventListener(
                                     'mouseup',
                                     function (e) {
-                                        let eventTarget = e.target;
-                                        let target = eventTarget;
-                                        while (target.parentNode) {
-                                            if (target.classList.contains('file')) {
-                                                break;
+                                        try {
+                                            let eventTarget = e.target;
+                                            let target = eventTarget;
+                                            while (target.parentNode) {
+                                                if (target.classList.contains('file')) {
+                                                    break;
+                                                }
+                                                target = target.parentNode;
+                                                if (target === document) {
+                                                    target = null;
+                                                }
                                             }
-                                            target = target.parentNode;
-                                            if (target === document) {
-                                                target = null;
-                                            }
+                                            let targetName = target ? target.querySelector('h3').innerText : 'Unknown';
+                                            resolve(targetName);
                                         }
-                                        let targetName = target ? target.querySelector('h3').innerText : 'Unknown';
-                                        resolve(targetName);
+                                        catch(e) {
+                                            reject();
+                                        }
+
                                     }
                                 )
                             }
                         );
+                        currentlyDragging = true;
                         currentAction.then(
                             function (targetName) {
                                 // copy the file to that folder
                                 alert(fileName + ' is dragged to ' + targetName);
+                                currentlyDragging = false;
+                            },
+                            function() {
+                                currentlyDragging = false;
+                                alert("You dragged it nowhere");
                             }
                         );
                     }
                 );
+            }
+        );
+        window.addEventListener(
+            'mousemove',
+            function () {
+
+                console.log(Promise.allSettled([currentAction]));
+                if (currentlyDragging) {
+                    document.body.style.cursor = 'grabbing'
+                }
+                else {
+                    document.body.style.cursor = 'pointer'
+                }
             }
         )
     </script>
