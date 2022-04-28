@@ -1,0 +1,75 @@
+<html>
+<style>
+    .file {
+        background:#eee;
+        width:200px;
+        height:120px;
+        margin:2px;
+        text-align:center;
+    }
+    .file h3 {
+        font-family: Verdana, sans-serif;
+        font-size:1.2em;
+    }
+</style>
+<body>
+    <div class="file">
+        <img src="image-icon.png" width="64px" height="64px" alt="image icon"/>
+       <h3>Image0001.jpg</h3>
+    </div>
+    <div class="folder file">
+        <img src="folder-icon.png" width="64px" height="64px" alt="image icon"/>
+        <h3>Instagram</h3>
+    </div>
+    <div class="folder file">
+        <img src="folder-icon.png" width="64px" height="64px" alt="image icon"/>
+        <h3>Archive</h3>
+    </div>
+    <div class="folder file">
+        <img src="folder-icon.png" width="64px" height="64px" alt="image icon"/>
+        <h3>Raw images</h3>
+    </div>
+    <script>
+        let currentAction;
+        document.querySelectorAll('.file').forEach(
+            function(el) {
+                el.addEventListener(
+                    'mousedown',
+                    function(event) {
+                        let fileName = el.querySelector('h3').innerText;
+                        event.preventDefault();
+                        currentAction = new Promise(
+                            function(resolve) {
+                                window.addEventListener(
+                                    'mouseup',
+                                    function (e) {
+                                        let eventTarget = e.target;
+                                        let target = eventTarget;
+                                        while (target.parentNode) {
+                                            if (target.classList.contains('file')) {
+                                                break;
+                                            }
+                                            target = target.parentNode;
+                                            if (target === document) {
+                                                target = null;
+                                            }
+                                        }
+                                        let targetName = target ? target.querySelector('h3').innerText : 'Unknown';
+                                        resolve(targetName);
+                                    }
+                                )
+                            }
+                        );
+                        currentAction.then(
+                            function (targetName) {
+                                // copy the file to that folder
+                                alert(fileName + ' is dragged to ' + targetName);
+                            }
+                        );
+                    }
+                );
+            }
+        )
+    </script>
+</body>
+</html>
