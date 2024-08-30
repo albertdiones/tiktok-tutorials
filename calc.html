@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<!-- Dedicated to ROY; naghahanap ng calculator sa tiktok live -->
+<style>
+#display {
+   border-style: solid;
+   padding:0.25em 0.5em;
+   text-align:right;
+   background:#aaa;
+   font-size:3em;
+}
+
+#display.result {
+   background:#ccc;
+}
+
+#subDisplay {
+	font-size:0.20em;
+    line-height:0.5em;
+}
+#previousNumber,#operation{
+}
+#buttons {
+   display:grid;
+   grid-template-columns: 60% 20%;
+}
+.buttons {
+   list-style-type:none;
+   display:grid;
+   padding:0;
+   margin:0;
+   grid-template-columns: 4em 4em 4em;
+   grid-template-rows: 4em 4em 4em;
+   cursor:pointer;
+}
+.buttons li {
+   font-size:2em;
+   padding:0.20em;
+   border:1px solid #eee;
+   box-shadow:0 0 1px;
+}
+.buttons#operations {
+   grid-template-columns: 4em;
+   grid-template-rows: 4em 4em 4em;
+}
+</style>
+<body>
+<div id="display">
+  <div id="subDisplay">
+    <span id="previousNumber">
+      
+    </span>
+    <span id="operation">
+     
+    </span>
+  </div>
+  <div id="result">
+      0
+  </div>
+</div>
+<div id="buttons">
+  <ol id="numbers" class="buttons">
+     <li>0</li>
+     <li>1</li>
+     <li>2</li>
+     <li>3</li>
+     <li>4</li>
+     <li>5</li>
+     <li>6</li>
+     <li>7</li>
+     <li>8</li>
+     <li>9</li>
+  </ol>
+  <ol id="operations" class="buttons">
+     <li>+</li>
+     <li>-</li>
+     <li>*</li>
+     <li>/</li>
+  </ol>
+  <ol id="functions" class="buttons">  
+     <li onclick="calculateResult()">=</li>
+     <li onclick="resetCalculator()">C</li>
+  </ol>
+</div>
+
+<script>
+  function appendToResult(result) {
+     if (document.querySelector('#result').innerText === '0' || document.querySelector('#display').classList.contains('result')) {
+     document.querySelector('#result').innerText = '';
+  	}
+     document.querySelector('#result').innerText += result;
+     
+     document.querySelector('#display').classList.remove('result');
+  }
+  
+  function chooseOperation(operation) {
+  	if (operation === '=') {
+    return;
+}
+     document.querySelector('#operation').innerText = operation;
+     document.querySelector('#previousNumber').innerText = document.querySelector('#result').innerText;
+     document.querySelector('#result').innerText = 0;
+  }
+  
+  document.querySelector('#buttons').addEventListener('click', (e) => {
+  	const elementClicked = e.target;
+    if (elementClicked.tagName === 'LI') {
+    	if (elementClicked.closest('ol#operations')) {
+        
+        if (document.querySelector('#previousNumber').innerText) {
+        calculateResult();
+        return;
+}
+        chooseOperation(elementClicked.innerText);
+        return;
+}
+		if (elementClicked.closest('ol#numbers')) {
+		   appendToResult(elementClicked.innerText);
+        }
+    }    
+  });
+  
+  function calculateResult() {
+  	let result = 0;
+    
+      	eval('result = ' + document.querySelector('#previousNumber').innerText + document.querySelector('#operation').innerText + document.querySelector('#result').innerText );
+    
+    document.querySelector('#result').innerText = result;
+    document.querySelector('#previousNumber').innerText = '';
+    document.querySelector('#operation').innerText = '';
+    
+    document.querySelector('#display').classList.add('result');
+  }
+  
+  function resetCalculator() {
+  
+    document.querySelector('#result').innerText = 0;
+    document.querySelector('#previousNumber').innerText = '';
+    document.querySelector('#operation').innerText = '';
+  }
+</script>
+</body>
+
+</html>
