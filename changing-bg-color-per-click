@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Changing BG Color Per Click</title>
+</head>
+<body>
+
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+<script type="text/javascript">
+
+let counter = 0;
+const colors = ['red','blue','pink','violet']
+const colorCount = colors.length;
+document.body.addEventListener('click', function() {
+   const color = colors[counter++ % colorCount];
+   document.body.style.backgroundColor = color;
+});
+</script>
+</body>
+</html>
+
+
