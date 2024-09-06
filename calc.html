@@ -38,6 +38,13 @@
    padding:0.20em;
    border:1px solid #eee;
    box-shadow:0 0 1px;
+   background:#f0f0f0;
+}
+.buttons li:hover {
+   background:#eaeaea;
+}
+.buttons li.pressed {
+   background:#d8d8d8;
 }
 .buttons#operations {
    grid-template-columns: 4em;
@@ -102,6 +109,18 @@
      document.querySelector('#result').innerText = 0;
   }
   
+   document.querySelector('#buttons').addEventListener('mousedown', (e) => {
+  	const element = e.target;
+    element.classList.add('pressed');
+}
+ );
+
+  
+  window.addEventListener('mouseup', (e) => {
+  document.querySelectorAll('.pressed').forEach( (el) => el.classList.remove('pressed'));
+    
+    }
+ );
   document.querySelector('#buttons').addEventListener('click', (e) => {
   	const elementClicked = e.target;
     if (elementClicked.tagName === 'LI') {
