@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<marquee><font color="red"><h1>This is a Headin'</h1></font></marquee>
+<p>This is a story.</p>
+<script type="text/javascript">
+let counter = 0;
+const fps = 30;
+const frameInterval = 1/fps;
+let increment = 1;
+setInterval(
+function() {
+   document.querySelector('h1').style.opacity = frameInterval* (counter % fps);
+   if (counter === fps-1) {
+   	increment  = -1;
+   }
+   if (counter === 0) {
+    increment = 1;
+   }
+   counter += increment;
+},1000/fps
+)
+</script>
+</body>
+</html>
+
+
