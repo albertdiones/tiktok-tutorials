@@ -1,7 +1,10 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <!-- Dedicated to ROY; naghahanap ng calculator sa tiktok live; and also whotfisj, di marunong maghanap ng github -->
 <style>
+body {
+   background:#222;
+}
 #display {
    border-style: solid;
    padding:0.25em 0.5em;
@@ -33,18 +36,56 @@
    grid-template-rows: 4em 4em 4em;
    cursor:pointer;
 }
+
+#numbers.buttons li:nth-child(1) {
+  order:10;
+  width:3.5em;
+}
+#numbers.buttons li:nth-child(2) {
+  order:7;
+}
+#numbers.buttons li:nth-child(3) {
+  order:8;
+}
+#numbers.buttons li:nth-child(4) {
+  order:9;
+}
+#numbers.buttons li:nth-child(5) {
+  order:4;
+}
+#numbers.buttons li:nth-child(6) {
+  order:5;
+}
+#numbers.buttons li:nth-child(7) {
+  order:6;
+}
+#numbers.buttons li:nth-child(8) {
+  order:1;
+}
+#numbers.buttons li:nth-child(9) {
+  order:2;
+}
+#numbers.buttons li:nth-child(10) {
+  order:3;
+}
+#cancel {
+	background-color:#bb8844;
+    color:#fff;
+    font-family:arial,san-serif;
+}
 .buttons li {
    font-size:2em;
    padding:0.20em;
-   border:1px solid #eee;
+   border:1px solid #5a5a5a;
    box-shadow:0 0 1px;
-   background:#f0f0f0;
+   background:#686868;
+   margin:0.1em;
 }
 .buttons li:hover {
-   background:#eaeaea;
+   background:#636363;
 }
 .buttons li.pressed {
-   background:#d8d8d8;
+   background:#5a5a5a;
 }
 .buttons#operations {
    grid-template-columns: 4em;
@@ -86,7 +127,7 @@
   </ol>
   <ol id="functions" class="buttons">  
      <li onclick="calculateResult()">=</li>
-     <li onclick="resetCalculator()">C</li>
+     <li onclick="resetCalculator()" id="cancel">C</li>
   </ol>
 </div>
 
