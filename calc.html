@@ -126,18 +126,29 @@ body {
      <li>*</li>
      <li>/</li>
   </ol>
-  <ol id="functions" class="buttons">  
+  <ol id="functions" class="buttons">
+  	 <li id="dot">.</li>
      <li onclick="calculateResult()">=</li>
      <li onclick="resetCalculator()" id="cancel">C</li>
   </ol>
 </div>
 
 <script>
-  function appendToResult(result) {
-     if (document.querySelector('#result').innerText === '0' || document.querySelector('#display').classList.contains('result')) {
-     document.querySelector('#result').innerText = '';
-  	}
-     document.querySelector('#result').innerText += result;
+  function appendToResult(newDigit) {
+  	const $result = document.querySelector('#result');
+    
+    if (newDigit === '.' && $result.innerText.includes('.')) {
+    	return;
+    }
+    
+     // to avoid leading zero e.g. 02
+     if ($result.innerText === '0' || document.querySelector('#display').classList.contains('result')) {
+        if (newDigit !== '.') {
+           $result.innerText = '';
+        }
+  	 }
+     
+     $result.innerText += newDigit;
      
      document.querySelector('#display').classList.remove('result');
   }
@@ -177,6 +188,10 @@ body {
 }
 		if (elementClicked.closest('ol#numbers')) {
 		   appendToResult(elementClicked.innerText);
+        }
+        
+        if (elementClicked.id === 'dot') {
+           appendToResult(elementClicked.innerText);
         }
     }    
   });
