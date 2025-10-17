@@ -1,0 +1,38 @@
+<html>
+<style>
+    /*1 + 100 + 1 + 10 = 112 */
+    body#css-specificity h1.heading {
+        color:red;
+    }
+    /* 100 + 1 + 100  = 201 */
+    #main h1#page-title {
+        color:green;
+    }
+    ul.list {
+        list-style-type: circle;
+        color:darkblue;
+    }
+    #main ul {
+        color:red;
+    }    
+</style>
+<body id="css-specificity" class="css tutorial">
+    <div id="main">
+        <h1 id="page-title" class="heading">
+            CSS Specificity
+        </h1>
+        <ul class="list">
+            <li>ID is 100 pts</li>
+            <li>class is 10 pts</li>
+            <li>element tag is 1 point</li>
+        </ul>
+
+        <p>
+            This adds up to be css selector's specificity
+            and only the highest specificity's property 
+            is what is applied
+        </p>
+
+    </div>
+</body>
+</html>
