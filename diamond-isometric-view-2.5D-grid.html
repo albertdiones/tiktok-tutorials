@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Diamond Grid</title>
+
+<style>
+  body {
+    background: #2b2b2b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 200px 400px;
+  }
+
+  /* Rotate the whole grid */
+  .diamond-wrapper {
+    transform: scaleY(0.4) rotate(-45deg) ;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(10, 48px);
+    grid-template-rows: repeat(10, 48px);
+  }
+
+  .cell {
+    width: 48px;
+    height: 48px;
+    background: #cfcfcf;
+    border: 1px solid #999;
+    box-sizing: border-box;
+
+    /* Rotate content back */
+    transform: rotate(0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #222;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="diamond-wrapper">
+  <div id="grid" class="grid"></div>
+</div>
+
+<script>
+  const grid = document.getElementById("grid");
+
+  for (let y = 0; y < 10; y++) {
+    for (let x = 0; x < 10; x++) {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      cell.textContent = `${x},${y}`;
+      grid.appendChild(cell);
+    }
+  }
+</script>
+
+</body>
+</html>
